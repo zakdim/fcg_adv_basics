@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:fcg_adv_basics/quiz.dart';
 
-void main(List<String> args) => runApp(const MyApp());
+void main(List<String> args) => runApp(const QuizApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class QuizApp extends StatelessWidget {
+  const QuizApp({super.key});
 
   @override
   Widget build(BuildContext context) {
