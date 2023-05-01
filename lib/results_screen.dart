@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:fcg_adv_basics/data/questions.dart';
+
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen({
     super.key,
@@ -7,6 +9,30 @@ class ResultsScreen extends StatelessWidget {
   });
 
   final List<String> chosenAnswers;
+
+  List<Map<String, Object>> getSummaryData() {
+    // final List<Map<String, Object>> summary = [];
+
+    // for (var i = 0; i < chosenAnswers.length; i++) {
+    //   summary.add({
+    //     'question_index': i,
+    //     'question': questions[i],
+    //     'correct_answer': questions[i].answers[0],
+    //     'user_answer': chosenAnswers[i],
+    //   });
+    // }
+
+    // return summary;
+
+    return List<int>.generate(chosenAnswers.length, (index) => index + 1)
+        .map((i) => ({
+              'question_index': i,
+              'question': questions[i],
+              'correct_answer': questions[i].answers[0],
+              'user_answer': chosenAnswers[i],
+            }))
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
