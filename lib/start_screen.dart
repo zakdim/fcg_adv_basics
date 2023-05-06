@@ -46,9 +46,10 @@ class StartScreen extends StatelessWidget {
             label: Text(
               'Start Quiz',
               style: GoogleFonts.lato(
-                  color: const Color.fromARGB(255, 201, 153, 251),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
+                color: const Color.fromARGB(255, 201, 153, 251),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           )
         ],

@@ -16,6 +16,15 @@ class _QuizState extends State<Quiz> {
   List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
 
+  Widget? activeHomeButton;
+  Widget? homeButton;
+
+  @override
+  void initState() {
+    super.initState();
+    homeButton = HomeButton(navigateHome);
+  }
+
   void switchScreen() {
     setState(() {
       activeScreen = 'questions-screen';
@@ -28,8 +37,25 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswers.length == questions.length) {
       setState(() {
         activeScreen = 'results-screen';
+        activeHomeButton = homeButton;
       });
     }
+  }
+
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'questions-screen';
+      activeHomeButton = null;
+    });
+  }
+
+  void navigateHome() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'start-screen';
+      activeHomeButton = null;
+    });
   }
 
   @override
@@ -45,6 +71,7 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == 'results-screen') {
       screenWidget = ResultsScreen(
         chosenAnswers: selectedAnswers,
+        onRestart: restartQuiz,
       );
     }
 
@@ -63,6 +90,25 @@ class _QuizState extends State<Quiz> {
           ),
           child: screenWidget,
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: activeHomeButton,
+      ),
+    );
+  }
+}
+
+class HomeButton extends StatelessWidget {
+  const HomeButton(this.navigateHome, {super.key});
+
+  final void Function() navigateHome;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: const Color.fromRGBO(150, 88, 218, 1),
+      onPressed: navigateHome,
+      child: const Icon(
+        Icons.home,
       ),
     );
   }
