@@ -13,8 +13,8 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  List<String> selectedAnswers = [];
-  var activeScreen = 'start-screen';
+  List<String> _selectedAnswers = [];
+  var _activeScreen = 'start-screen';
 
   Widget? activeHomeButton;
   Widget? homeButton;
@@ -25,18 +25,18 @@ class _QuizState extends State<Quiz> {
     homeButton = HomeButton(navigateHome);
   }
 
-  void switchScreen() {
+  void _switchScreen() {
     setState(() {
-      activeScreen = 'questions-screen';
+      _activeScreen = 'questions-screen';
     });
   }
 
-  void chooseAnswer(String answer) {
-    selectedAnswers.add(answer);
+  void _chooseAnswer(String answer) {
+    _selectedAnswers.add(answer);
 
-    if (selectedAnswers.length == questions.length) {
+    if (_selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = 'results-screen';
+        _activeScreen = 'results-screen';
         activeHomeButton = homeButton;
       });
     }
@@ -44,33 +44,33 @@ class _QuizState extends State<Quiz> {
 
   void restartQuiz() {
     setState(() {
-      selectedAnswers = [];
-      activeScreen = 'questions-screen';
+      _selectedAnswers = [];
+      _activeScreen = 'questions-screen';
       activeHomeButton = null;
     });
   }
 
   void navigateHome() {
     setState(() {
-      selectedAnswers = [];
-      activeScreen = 'start-screen';
+      _selectedAnswers = [];
+      _activeScreen = 'start-screen';
       activeHomeButton = null;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget screenWidget = StartScreen(switchScreen);
+    Widget screenWidget = StartScreen(_switchScreen);
 
-    if (activeScreen == 'questions-screen') {
+    if (_activeScreen == 'questions-screen') {
       screenWidget = QuestionsScreen(
-        onSelectAnswer: chooseAnswer,
+        onSelectAnswer: _chooseAnswer,
       );
     }
 
-    if (activeScreen == 'results-screen') {
+    if (_activeScreen == 'results-screen') {
       screenWidget = ResultsScreen(
-        chosenAnswers: selectedAnswers,
+        chosenAnswers: _selectedAnswers,
         onRestart: restartQuiz,
       );
     }

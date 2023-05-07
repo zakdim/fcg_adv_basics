@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:fcg_adv_basics/quiz.dart';
 
-void main(List<String> args) => runApp(const QuizApp());
+void main(List<String> args) => runApp(const Quiz());
 
-class QuizApp extends StatelessWidget {
-  const QuizApp({super.key});
+// void main(List<String> args) => runApp(const QuizApp());
 
-  @override
-  Widget build(BuildContext context) {
-    return const Quiz();
-  }
-}
+// class QuizApp extends StatelessWidget {
+//   const QuizApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Quiz();
+//   }
+// }
